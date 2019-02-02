@@ -193,6 +193,6 @@ export async function run(context: any, req: any) {
       await connection.manager.save(FusionVersion, post);
     }
   });
-  await promises;
+  await Promise.all(promises);
   connection.close();
 }

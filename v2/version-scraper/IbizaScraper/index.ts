@@ -22,7 +22,6 @@ export async function run(context: any, myTimer: any) {
     stage4: 'West US',
     stage5: 'Remaining Regions',
   };
-  const timeStamp = new Date().toISOString();
   const versionFileCall = await axios.get(ibizaVersionsUri);
   const versionFile = Object.keys(versionFileCall.data)
     .filter(x => x.indexOf('$') === -1)
@@ -47,6 +46,6 @@ export async function run(context: any, myTimer: any) {
     }
   });
 
-  await p;
+  await Promise.all(p);
   connection.close();
 }
