@@ -21,8 +21,25 @@ if(!fs.existsSync('./ormconfig.json')){
         "synchronize": true
       }`, {encoding:"UTF-8"})
 }
+function normalizePort(val) {
+    var port = parseInt(val, 10);
+  
+    if (isNaN(port)) {
+      // named pipe
+      return val;
+    }
+  
+    if (port >= 0) {
+      // port number
+      return port;
+    }
+  
+    return false;
+  }
+
+const  port = normalizePort(process.env.PORT || '3000');
 bootstrap({
-    port: 3001,
+    port,
     controllers: [
         IbizaVersionController,
         FusionVersionController
@@ -37,8 +54,7 @@ bootstrap({
     playground: true,
 
 }).then(() => {
-    console.log("Your app is up and running on http://localhost:3001 . " +
-        "You can use Playground in development mode on http://localhost:3001/playground");
+    console.log(`Your app is up and running on http://localhost:${port} .  You can use Playground in development mode on http://localhost:${port}/playground`);
 
 }).catch(error => {
     console.error(error.stack ? error.stack : error);
