@@ -46,5 +46,7 @@ export async function run(context: any, myTimer: any) {
       await connection.manager.save(IbizaVersion, post);
     }
   });
+
   await p;
+  connection.close();
 }

@@ -149,7 +149,6 @@ const isNewerVersion = (lastVersion, newVersion) => {
   return newVersionBuildNumber > lastVersionBuildNumber;
 };
 export async function run(context: any, req: any) {
-  return;
   const connection: Connection = await createConnection({
     type: 'postgres',
     host: process.env.POSTGRES_ENDPOINT,
@@ -195,4 +194,5 @@ export async function run(context: any, req: any) {
     }
   });
   await promises;
+  connection.close();
 }
