@@ -28,7 +28,9 @@
   },
   "scripts": {
     "compile": "tsc",
-    "start": "npm run compile && node ./src/index.js"
+    "dev": "npm run compile && node ./src/index.js",
+    
+    "start":"node ./src/index.js"
   },
   "devDependencies": {
     "typescript": "^3.3.1"

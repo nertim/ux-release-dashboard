@@ -16,6 +16,7 @@ phases:
 
       - script: |
           cd v2/server
+          npm run compile
           zip -r payload.zip .
         displayName: 'zip function conects'
 
