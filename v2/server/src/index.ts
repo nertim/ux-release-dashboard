@@ -34,6 +34,7 @@ bootstrap({
         GithubCommit
     ],
     schemas: [__dirname + "/schema/**/*.graphql"],
+    playground: true,
 
 }).then(() => {
     console.log("Your app is up and running on http://localhost:3001 . " +
