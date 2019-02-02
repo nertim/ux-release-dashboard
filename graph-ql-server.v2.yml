@@ -1,0 +1,32 @@
+# run the same job on 2 CI machines in parallel
+# https://docs.microsoft.com/en-us/vsts/pipelines/process/phases
+phases:
+  - phase: Test
+    queue: 'Hosted macOS'
+    steps:
+      - task: NodeTool@0
+        inputs:
+          versionSpec: '10.x'
+        displayName: 'Install Node.js'
+
+      - bash: |
+          cd v2/server
+          npm install
+        displayName: 'NPM Install'
+
+      - script: |
+          cd v2/server
+          zip -r payload.zip .
+        displayName: 'zip function conects'
+
+      - task: CopyFiles@2
+        displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
+        inputs:
+          SourceFolder: v2/server
+          TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+      - task: PublishBuildArtifacts@1
+        displayName: 'Publish Artifact: dest'
+        inputs:
+          PathtoPublish: '$(Build.ArtifactStagingDirectory)/payload.zip'
+          ArtifactName: payload
