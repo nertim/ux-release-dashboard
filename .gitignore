@@ -40,6 +40,6 @@ venv.bak/
 __pycache__/
 *.py[cod]
 *$py.class
-
+dist/
 v2/**/*.js
 v2/**/*.js.map

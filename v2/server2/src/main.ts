@@ -3,7 +3,7 @@ import { AppModule } from './app.module';
 function normalizePort(val) {
   const p = parseInt(val, 10);
 
-  if (isNaN(port)) {
+  if (isNaN(p)) {
     // named pipe
     return val;
   }
