@@ -3,7 +3,6 @@ import { DevOpsData } from "./DevOpsData";
 import { GithubCommit } from "./GithubCommits";
 
 @Entity()
-@Unique(["name", "version"])
 export class FusionVersion {
     @PrimaryGeneratedColumn()
     id: number;

@@ -14,7 +14,6 @@ import { DevOpsData } from './devops-data.entity';
 import { GithubCommit } from './github-commits.entity';
 
 @Entity()
-@Unique(['name', 'version'])
 export class FusionVersion {
   @PrimaryGeneratedColumn()
   id: number;
