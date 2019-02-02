@@ -1,6 +1,0 @@
-type IbizaVersion {
-    id: Int
-    name: String
-    version: String
-    createdAt: Date
-}

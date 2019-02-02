@@ -1,5 +1,0 @@
-type Query {
-  fusionVersions(name:String): [FusionVersion]
-  latestFusionVersion(name:String!): FusionVersion
-}
-

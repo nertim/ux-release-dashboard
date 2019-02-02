@@ -1,0 +1,43 @@
+type Query {
+  fusionVersions(name:String): [FusionVersion]
+  # latestFusionVersion(name:String!): FusionVersion
+}
+
+type FusionVersion {
+    id: Int
+    createdAt: String
+    name: String
+    version: String
+    prod: Boolean
+    lastVersion: String
+    devOpsData: DevOpsData
+    githubCommitData: [GithubCommits]
+  }
+  type DevOpsData {
+  id: Int!
+  buildNumber: String!
+  status: String!
+  result: String!
+  startTime: String!
+  url: String!
+  sourceBranch: String!
+  sourceVersion: String!
+  requestedFor: RequestedFor
+}
+type RequestedFor {
+  displayName: String!
+}
+type GithubCommitAuthor {
+    name: String!
+    email: String!
+    date: String!
+}
+
+type GithubCommitData {
+    author: GithubCommitAuthor!
+    message: String!
+}
+type GithubCommits {
+    sha: String!
+    commit: GithubCommitData
+}

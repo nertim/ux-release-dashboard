@@ -1,0 +1,10 @@
+type Query {
+  ibizaVersions: [IbizaVersion]
+}
+
+type IbizaVersion {
+    id: Int
+    name: String
+    version: String
+    createdAt: String
+}

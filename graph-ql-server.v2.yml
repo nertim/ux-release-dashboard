@@ -10,20 +10,19 @@ phases:
         displayName: 'Install Node.js'
 
       - bash: |
-          cd v2/server
+          cd v2/server2
           npm install
         displayName: 'NPM Install'
 
       - script: |
-          cd v2/server
-          npm run compile
+          cd v2/server2
           zip -r payload.zip .
-        displayName: 'zip function conects'
+        displayName: 'zip server'
 
       - task: CopyFiles@2
         displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
         inputs:
-          SourceFolder: v2/server
+          SourceFolder: v2/server2
           TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
       - task: PublishBuildArtifacts@1
