@@ -30,7 +30,10 @@ export class FusionVersion {
   @Column()
   prod: boolean;
 
-  @ManyToOne(type => DevOpsData, build => build.versions, { cascade: true })
+  @ManyToOne(type => DevOpsData, build => build.versions, {
+    cascade: true,
+    eager: true,
+  })
   @JoinColumn()
   devOpsData?: DevOpsData;
 
@@ -39,6 +42,7 @@ export class FusionVersion {
 
   @ManyToMany(type => GithubCommit, commit => commit.versions, {
     cascade: true,
+    eager: true,
   })
   @JoinTable()
   githubCommitData?: GithubCommit[];
