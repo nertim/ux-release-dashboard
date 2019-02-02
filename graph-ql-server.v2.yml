@@ -16,6 +16,7 @@ phases:
 
       - script: |
           cd v2/server2
+          npm run build
           zip -r payload.zip .
         displayName: 'zip server'
 
