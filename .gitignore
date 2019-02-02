@@ -41,5 +41,7 @@ __pycache__/
 *.py[cod]
 *$py.class
 dist/
-v2/**/*.js
-v2/**/*.js.map
+server/**/*.js
+server/**/*.js.map
+version-scraper/**/*.js
+version-scraper/**/*.js.map

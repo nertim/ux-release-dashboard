@@ -10,12 +10,12 @@ phases:
         displayName: 'Install Node.js'
 
       - bash: |
-          cd v2/version-scraper
+          cd version-scraper
           npm install
         displayName: 'NPM Install'
 
       - script: |
-          cd v2/version-scraper
+          cd version-scraper
           npm run compile
           zip -r payload.zip .
         displayName: 'zip function conects'
@@ -23,7 +23,7 @@ phases:
       - task: CopyFiles@2
         displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
         inputs:
-          SourceFolder: v2/version-scraper
+          SourceFolder: version-scraper
           TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
       - task: PublishBuildArtifacts@1
