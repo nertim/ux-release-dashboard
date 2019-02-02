@@ -1,0 +1,10 @@
+type FusionVersion {
+    id: Int
+    createdAt: String
+    name: String
+    version: String
+    prod: Boolean
+    lastVersion: String
+    devOpsData: DevOpsData
+    githubCommitData: [GithubCommits]
+  }

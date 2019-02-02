@@ -1,0 +1,16 @@
+{
+  "name": "ux-scraper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Travis",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "typeorm": "^0.2.12",
+    "pg": "^7.8.0"
+  }
+}

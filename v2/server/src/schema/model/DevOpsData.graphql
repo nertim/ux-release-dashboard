@@ -1,0 +1,14 @@
+type DevOpsData {
+  id: Int!
+  buildNumber: String!
+  status: String!
+  result: String!
+  startTime: String!
+  url: String!
+  sourceBranch: String!
+  sourceVersion: String!
+  requestedFor: requestedFor
+}
+type requestedFor {
+  displayName: String!
+}

@@ -1,0 +1,11 @@
+{
+        "type": "postgres",
+        "host": "uxversions.postgres.database.azure.com",
+        "port": 5432,
+        "username":"hartra344@uxversions", 
+        "password": "iis6!dfu",
+        "database": "testdb",
+        "entities": ["src/**/**.entity{.ts,.js}"],
+        "ssl": true,
+        "synchronize": true
+      }

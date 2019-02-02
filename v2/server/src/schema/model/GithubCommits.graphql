@@ -1,0 +1,14 @@
+type GithubCommitAuthor {
+    name: String!
+    email: String!
+    date: String!
+}
+
+type GithubCommitData {
+    author: GithubCommitAuthor!
+    message: String!
+}
+type GithubCommits {
+    sha: String!
+    commit: GithubCommitData
+}
