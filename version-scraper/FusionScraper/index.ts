@@ -166,7 +166,7 @@ export async function run(context: any, req: any) {
     const devOpsData = await getDevOpsBuild(versionFileCall.data);
     let document = {
       name: obj.name,
-      prod: obj.prod,
+      prod: !obj.prod,
       version: versionFileCall.data,
       devOpsData,
       lastVersion: null,
