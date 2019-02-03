@@ -43,6 +43,18 @@ export async function run(context: any, myTimer: any) {
       console.log('updated');
       const post = connection.manager.create(IbizaVersion, v);
       await connection.manager.save(IbizaVersion, post);
+      await axios({
+        method: 'post',
+        url: process.env.EventWebhookUrl,
+        data: {
+          environment:IbizaProdStages.includes(v.name) ? "prod" : "stage",
+          portal: "ibiza",
+          oldVersion: !lastVersion ? '' : lastVersion.version,
+          newVersion: v.version,
+          regions: IbizaProdToRegion[v.name],
+          link: `https://uxversions.azurefd.net`
+        }
+      })
     }
   });
 
