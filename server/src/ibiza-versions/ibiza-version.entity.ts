@@ -3,7 +3,6 @@ import {
   PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
-  Unique,
 } from 'typeorm';
 
 @Entity()
@@ -12,7 +11,7 @@ export class IbizaVersion {
   id: number;
 
   @CreateDateColumn()
-  createdAt: string;
+  createdAt: Date;
 
   @Column()
   name: string;

@@ -58,7 +58,7 @@ export default function FusionHistory(props) {
     name
     versionHistory {
       version
-      timeStamp
+      createdAt
       githubCommitData {
           sha
           commit {
@@ -105,12 +105,12 @@ export default function FusionHistory(props) {
                 })
                 .map(version => (
                   <TimelineEvent
-                    key={version.timeStamp}
+                    key={version.createdAt}
                     titleStyle={{ fontWeight: "bold", fontSize: "14px" }}
                     createdAtStyle={{ fontWeight: "bold", fontSize: "14px" }}
                     title={`Version: ${version.version}`}
                     createdAt={moment
-                      .utc(version.timeStamp)
+                      .utc(version.createdAt)
                       .local()
                       .format("YYYY-MM-DD hh:mm a")}
                     icon={<Icon iconName="vstslogo" />}

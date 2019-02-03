@@ -11,9 +11,17 @@ export class DevOpsData {
     requestedFor?: RequestedFor;
 }
 
+export class FusionLocation {
+    name: string;
+    url: string;
+    prod: boolean;
+    latestVersion?: FusionVersion;
+    versionHistory?: FusionVersion[];
+}
+
 export class FusionVersion {
     id?: number;
-    createdAt?: string;
+    createdAt?: DateTime;
     name?: string;
     version?: string;
     prod?: boolean;
@@ -42,13 +50,17 @@ export class IbizaVersion {
     id?: number;
     name?: string;
     version?: string;
-    createdAt?: string;
+    createdAt?: DateTime;
 }
 
 export abstract class IQuery {
-    abstract fusionVersions(name?: string): FusionVersion[] | Promise<FusionVersion[]>;
+    abstract fusionLocations(): FusionLocation[] | Promise<FusionLocation[]>;
 
-    abstract ibizaVersions(): IbizaVersion[] | Promise<IbizaVersion[]>;
+    abstract getFusionLocation(location?: string): FusionLocation | Promise<FusionLocation>;
+
+    abstract ibizaStages(): Stage[] | Promise<Stage[]>;
+
+    abstract getIbizaStage(name?: string): Stage | Promise<Stage>;
 
     abstract temp__(): boolean | Promise<boolean>;
 }
@@ -56,3 +68,13 @@ export abstract class IQuery {
 export class RequestedFor {
     displayName: string;
 }
+
+export class Stage {
+    name: string;
+    latestVersion?: IbizaVersion;
+    versionHistory?: IbizaVersion[];
+}
+
+export type Date = any;
+export type DateTime = any;
+export type Time = any;

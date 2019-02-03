@@ -1,35 +1,32 @@
-import { Query, Resolver } from '@nestjs/graphql';
-import { PubSub } from 'graphql-subscriptions';
+import { Query, Resolver, ResolveProperty, Parent, Args } from '@nestjs/graphql';
 import { IbizaVersionsService } from './ibiza-versions.service';
+import { Stage } from 'src/graphql.schema';
 
-@Resolver('IbizaVersion')
+@Resolver('Stage')
 export class IbizaResolvers {
   constructor(private readonly ibizaService: IbizaVersionsService) {}
 
   @Query()
-  async ibizaVersions() {
-    return await this.ibizaService.findAll();
+  async ibizaStages() {
+    return await this.ibizaService.getIbizaStages();
   }
 
-//   @Query('cat')
-//   async findOneById(
-//     @Args('id', ParseIntPipe)
-//     id: number,
-//   ): Promise<Cat> {
-//     return await this.catsService.findOneById(id);
-//   }
+  @Query()
+  async getIbizaStage(@Args('name') name: string) {
+    return {name};
+  }
 
-//   @Mutation('createCat')
-//   async create(@Args('createCatInput') args: CreateCatDto): Promise<Cat> {
-//     const createdCat = await this.catsService.create(args);
-//     pubSub.publish('catCreated', { catCreated: createdCat });
-//     return createdCat;
-//   }
+  @ResolveProperty()
+  async latestVersion(@Parent() fusionLocation: Stage) {
+    const { name } = fusionLocation;
+    const item = await this.ibizaService.getLatestVersion(name);
+    return item;
+  }
 
-//   @Subscription('catCreated')
-//   catCreated() {
-//     return {
-//       subscribe: () => pubSub.asyncIterator('catCreated'),
-//     };
-//   }
+  @ResolveProperty()
+  async versionHistory(@Parent() fusionLocation: Stage) {
+    const { name } = fusionLocation;
+    const items = await this.ibizaService.getVersionHistory(name);
+    return items;
+  }
 }

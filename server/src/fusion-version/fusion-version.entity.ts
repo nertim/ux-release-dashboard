@@ -19,7 +19,7 @@ export class FusionVersion {
   id: number;
 
   @CreateDateColumn()
-  createdAt: string;
+  createdAt: Date;
 
   @Column()
   name: string;

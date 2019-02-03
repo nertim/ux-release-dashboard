@@ -1,11 +1,24 @@
+# Write your query or mutation here
+# Write your query or mutation here
+scalar Date
+scalar Time
+scalar DateTime
 type Query {
-  fusionVersions(name:String): [FusionVersion]
-  # latestFusionVersion(name:String!): FusionVersion
+  fusionLocations: [FusionLocation]
+  getFusionLocation(location: String): FusionLocation
+}
+
+type FusionLocation {
+    name: String!
+    url: String!
+    prod: Boolean!
+    latestVersion: FusionVersion
+    versionHistory: [FusionVersion]
 }
 
 type FusionVersion {
     id: Int
-    createdAt: String
+    createdAt: DateTime
     name: String
     version: String
     prod: Boolean

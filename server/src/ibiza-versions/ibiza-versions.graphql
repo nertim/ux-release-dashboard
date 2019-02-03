@@ -1,10 +1,18 @@
+scalar DateTime
 type Query {
-  ibizaVersions: [IbizaVersion]
+  ibizaStages: [Stage]
+  getIbizaStage(name: String): Stage
 }
 
 type IbizaVersion {
     id: Int
     name: String
     version: String
-    createdAt: String
+    createdAt: DateTime
 }
+
+type Stage {
+    name: String!
+    latestVersion: IbizaVersion
+    versionHistory: [IbizaVersion]
+  }

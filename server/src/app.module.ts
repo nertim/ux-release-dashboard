@@ -4,6 +4,11 @@ import { join } from 'path';
 import { FusionVersionModule } from './fusion-version/fusion-version.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { IbizaVersionsModule } from './ibiza-versions/ibiza-versions.module';
+import {
+  GraphQLDate,
+  GraphQLTime,
+  GraphQLDateTime,
+} from 'graphql-iso-date';
 
 @Module({
   imports: [
@@ -24,6 +29,7 @@ import { IbizaVersionsModule } from './ibiza-versions/ibiza-versions.module';
       typePaths: ['./**/*.graphql'],
       installSubscriptionHandlers: true,
       playground: true,
+      resolvers: { Date: GraphQLDate, Time: GraphQLTime, DateTime: GraphQLDateTime},
       definitions: {
         path: join(process.cwd(), 'src/graphql.schema.ts'),
         outputAs: 'class',

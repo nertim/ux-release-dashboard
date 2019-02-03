@@ -1,35 +1,39 @@
-import { Query, Resolver } from '@nestjs/graphql';
+import {
+  Query,
+  Resolver,
+  ResolveProperty,
+  Parent,
+  Args,
+} from '@nestjs/graphql';
 import { PubSub } from 'graphql-subscriptions';
 import { FusionVersionService } from './fusion-version.service';
+import { FusionLocation } from 'src/graphql.schema';
 
-@Resolver('FusionVersion')
-export class FusionResolvers {
+@Resolver('FusionLocation')
+export class FusionLocationResolvers {
   constructor(private readonly fusionService: FusionVersionService) {}
-
   @Query()
-  async fusionVersions() {
-    return await this.fusionService.findAll();
+  async fusionLocations() {
+    return await this.fusionService.getLocations();
   }
 
-//   @Query('cat')
-//   async findOneById(
-//     @Args('id', ParseIntPipe)
-//     id: number,
-//   ): Promise<Cat> {
-//     return await this.catsService.findOneById(id);
-//   }
+  @Query()
+  async getFusionLocation(@Args('location') location: string) {
+    const locs = await this.fusionService.getLocations();
+    return locs.find(x => x.name === location);
+  }
 
-//   @Mutation('createCat')
-//   async create(@Args('createCatInput') args: CreateCatDto): Promise<Cat> {
-//     const createdCat = await this.catsService.create(args);
-//     pubSub.publish('catCreated', { catCreated: createdCat });
-//     return createdCat;
-//   }
+  @ResolveProperty()
+  async latestVersion(@Parent() fusionLocation: FusionLocation) {
+    const { name } = fusionLocation;
+    const item = await this.fusionService.getLatestVersion(name);
+    return item;
+  }
 
-//   @Subscription('catCreated')
-//   catCreated() {
-//     return {
-//       subscribe: () => pubSub.asyncIterator('catCreated'),
-//     };
-//   }
+  @ResolveProperty()
+  async versionHistory(@Parent() fusionLocation: FusionLocation) {
+    const { name } = fusionLocation;
+    const items = await this.fusionService.getVersionHistory(name);
+    return items;
+  }
 }
