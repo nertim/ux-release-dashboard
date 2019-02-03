@@ -24,7 +24,7 @@ const fusionLocations = [
 ];
 const functionObjs = fusionLocations.map(loc => ({
   name: loc,
-  prod: loc.indexOf('staging') > -1,
+  prod: loc.indexOf('staging') === -1,
   environment: 'public',
   uri: `https://functions-${loc}.azurewebsites.net/api/version`,
 }));
@@ -166,7 +166,7 @@ export async function run(context: any, req: any) {
     const devOpsData = await getDevOpsBuild(versionFileCall.data);
     let document = {
       name: obj.name,
-      prod: !obj.prod,
+      prod: obj.prod,
       version: versionFileCall.data,
       devOpsData,
       lastVersion: null,
@@ -180,7 +180,6 @@ export async function run(context: any, req: any) {
       .leftJoinAndSelect("version.devOpsData", "DevOpsData")
       .orderBy('version.createdAt', 'DESC', 'NULLS LAST')
       .getOne();
-    console.log(lastVersion)
     if (!lastVersion || lastVersion.version !== versionFileCall.data) {
       if (lastVersion) {
         document.lastVersion = lastVersion.version;
