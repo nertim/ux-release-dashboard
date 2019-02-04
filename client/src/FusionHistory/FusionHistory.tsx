@@ -5,7 +5,7 @@ import { Timeline, TimelineEvent } from 'react-event-timeline';
 import { ReactComponent as Logo } from '../AzureAppService.svg';
 import processString from 'react-process-string';
 import dayjs from 'dayjs';
-import { Button, Divider, Search, SearchProps } from 'semantic-ui-react';
+import { Button, Divider, Search, SearchProps, Input, InputProps } from 'semantic-ui-react';
 
 const TimelineEventNew = TimelineEvent as any;
 const config = [
@@ -31,14 +31,14 @@ const FusionHistory = (props: { path: string; loc?: string }) => {
   const onCommitClick = url => {
     window.open(url, '_blank');
   };
-  const handleSearchChange = (e, { value }: SearchProps) => {
+  const handleSearchChange = (e, { value }: InputProps) => {
     setSearchTerm(value);
   };
   return (
     <>
       <h2>Fusion History - {props.loc}</h2>
       <Divider />
-      <Search  input="text" onSearchChange={handleSearchChange} value={searchTerm} />
+      <Input style={{marginLeft: '15px', marginRight: '15px'}} fluid icon='search' placeholder='Search...' onChange={handleSearchChange} />
       <Divider  style={{marginBottom:0}}/>
       <Query
         query={gql`
