@@ -54,10 +54,10 @@ const ProdView = (data: QueryDataType) => {
     <>
       <Grid stackable columns={2}>
         <Grid.Column>
-          <IbizaStages header="Ibiza Production" ibizaStages={data!.ibizaStages!.filter(x => IbizaProdStages.includes(x.name))} />
+          <IbizaStages header="Ibiza" ibizaStages={data!.ibizaStages!.filter(x => IbizaProdStages.includes(x.name))} />
         </Grid.Column>
         <Grid.Column>
-          <FusionLocationsCard header="Fusion Prod" fusionLocations={data!.fusionLocations!.filter(x => x.prod).sort(sortFunctionFusion)} />
+          <FusionLocationsCard header="Fusion" fusionLocations={data!.fusionLocations!.filter(x => x.prod).sort(sortFunctionFusion)} />
         </Grid.Column>
       </Grid>
     </>
@@ -68,17 +68,17 @@ const StageView = (data: QueryDataType) => {
     <>
       <Grid stackable columns={2}>
         <Grid.Column>
-          <IbizaStages header="Ibiza Stage" ibizaStages={data!.ibizaStages!.filter(x => !IbizaProdStages.includes(x.name))} />
+          <IbizaStages header="Ibiza" ibizaStages={data!.ibizaStages!.filter(x => !IbizaProdStages.includes(x.name))} />
         </Grid.Column>
         <Grid.Column>
-          <FusionLocationsCard header="Fusion Stage" fusionLocations={data!.fusionLocations!.filter(x => !x.prod).sort(sortFunctionFusion)} />
+          <FusionLocationsCard header="Fusion" fusionLocations={data!.fusionLocations!.filter(x => !x.prod).sort(sortFunctionFusion)} />
         </Grid.Column>
       </Grid>
     </>
   );
 };
 
-const Dashboard = () => {
+const Dashboard = (props: {path:string}) => {
   return (
     <Query<QueryDataType> query={DashboardQuery}>
       {({ loading, error, data }) => {

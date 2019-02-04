@@ -2,6 +2,8 @@ import React, { FC } from 'react';
 import './IbizaVersionCard.css';
 import dayjs from 'dayjs';
 import { Stage } from '../../../graphql.schema';
+import { Button } from 'semantic-ui-react';
+import { navigate } from '@reach/router';
 
 interface Props {
   header: string;
@@ -19,7 +21,7 @@ const IbizaProdStages = ['stage1', 'stage2', 'stage3', 'stage4', 'stage5'];
 const IbizaVersionCard: FC<Props> = props => {
   const { header, items } = props;
   const onHistoryClick = (location: any) => {
-    //navigate(`/ibiza/history/${location}`);
+    navigate(`/ibiza/history/${location}`);
   };
 
   return (
@@ -38,14 +40,14 @@ const IbizaVersionCard: FC<Props> = props => {
           {items.map(item => {
             const location = IbizaProdToRegion[item.name];
             return (
-              <tr>
+              <tr key={item.name}>
                 <td>{!!location ? `${item.name} (${location})` : item.name}</td>
                 <td>{item.latestVersion!.version}</td>
                 <td>{dayjs(item.latestVersion!.createdAt).format('MM-DD-YYYY - h:mmA')}</td>
                 <td>
-                  {/* <ActionButton iconProps={{ iconName: 'link' }} allowDisabledFocus={true} onClick={() => onHistoryClick(item.name)}> */}
-                  Open
-                  {/* </ActionButton> */}
+                  <Button primary onClick={() => onHistoryClick(item.name)}>
+                    Open
+                  </Button>
                 </td>
               </tr>
             );
